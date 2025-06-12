@@ -12,7 +12,8 @@
       width: 100%;
       height: 100vh;
       overflow: hidden;
-      background-color: #000; /* 画像の周りの余白は黒になります */
+      /* 変更点: 背景色をご指定の色に変更 */
+      background-color: #f0eadc;
       font-family: sans-serif;
     }
 
@@ -44,12 +45,13 @@
     }
 
     /* --- アニメーションの定義 (フェードイン & フェードアウト) --- */
+    /* 変更点: ホールド時間（表示時間）を長くするために、キーフレームの割合を調整 */
     @keyframes fadeLoop {
       /* 1枚あたりの表示時間の割合: 100% / 7枚 ≒ 14.28% */
       0%    { opacity: 0; }
-      5%    { opacity: 1; }
-      9.28% { opacity: 1; }
-      14.28% { opacity: 0; }
+      2%    { opacity: 1; }     /* 約0.4秒でフェードイン */
+      12.28% { opacity: 1; }    /* 約2.2秒表示し続ける (表示時間UP!) */
+      14.28% { opacity: 0; }    /* 約0.4秒でフェードアウト */
       100%  { opacity: 0; }
     }
 
