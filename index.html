@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pictogram Signage</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+JP&family=Noto+Sans+SC&display=block" rel="stylesheet">
-  
   <style>
     /* --- 基本設定 --- */
     html, body {
@@ -20,12 +19,12 @@
 
     /* --- スライドショーのコンテナ --- */
     .slideshow-container {
+      position: relative;
       width: 100%;
       height: 100%;
-      position: relative;
     }
 
-    /* --- 各スライドの基本スタイル --- */
+    /* --- 背景画像スライドの基本スタイル --- */
     .slide {
       position: absolute;
       top: 0;
@@ -41,53 +40,80 @@
       will-change: opacity;
     }
 
-    /* --- アニメーションの定義 --- */
+    /* --- 背景画像アニメーション --- */
     @keyframes fadeLoop {
       0%    { opacity: 0; }
-      2%    { opacity: 1; }
-      12.28% { opacity: 1; }
-      14.28% { opacity: 0; }
+      /* 1枚あたり6秒のうち、最初の1秒でフェードイン */
+      16.66% { opacity: 1; }
+      /* 次の画像に切り替わる前の1秒でフェードアウト */
+      83.33% { opacity: 1; } 
       100%  { opacity: 0; }
     }
 
-    /* --- 画像と速度のカスタマイズ --- */
+    /* --- 背景画像の表示時間 --- */
     .slide {
-      animation-duration: 35s; /* 5秒 × 7枚 */
+      /* 1枚あたり6秒 × 7枚 = 42秒 でループ */
+      animation-duration: 42s;
     }
     .slide:nth-child(1) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram1.jpg'); animation-delay: 0s; }
-    .slide:nth-child(2) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram2.jpg'); animation-delay: 5s; }
-    .slide:nth-child(3) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram3.jpg'); animation-delay: 10s; }
-    .slide:nth-child(4) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram4.jpg'); animation-delay: 15s; }
-    .slide:nth-child(5) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram5.jpg'); animation-delay: 20s; }
-    .slide:nth-child(6) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram6.jpg'); animation-delay: 25s; }
-    .slide:nth-child(7) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram7.jpg'); animation-delay: 30s; }
+    .slide:nth-child(2) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram2.jpg'); animation-delay: 6s; }
+    .slide:nth-child(3) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram3.jpg'); animation-delay: 12s; }
+    .slide:nth-child(4) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram4.jpg'); animation-delay: 18s; }
+    .slide:nth-child(5) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram5.jpg'); animation-delay: 24s; }
+    .slide:nth-child(6) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram6.jpg'); animation-delay: 30s; }
+    .slide:nth-child(7) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram7.jpg'); animation-delay: 36s; }
+
+    /* --- 中央メッセージ --- */
+    .center-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #555;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-align: center;
+      opacity: 0;
+      animation-name: fadeInOut;
+      animation-duration: 6s; /* 背景画像1枚あたりのサイクルに合わせる */
+      animation-iteration-count: infinite;
+      will-change: opacity;
+    }
+
+    /* --- メッセージのアニメーション (ふんわり) --- */
+    @keyframes fadeInOut {
+      0%    { opacity: 0; }
+      16.66% { opacity: 1; } /* 1秒かけてフェードイン */
+      33.33% { opacity: 1; } /* 1秒表示 */
+      50%   { opacity: 0; } /* 1秒かけてフェードアウト */
+      100%  { opacity: 0; }
+    }
 
     /* --- 固定表示要素 (右下メッセージ) --- */
     .fixed-bottom-right {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
+      bottom: 15px;
+      right: 15px;
       color: #333;
-      font-size: 1.1em;
+      font-size: 0.9em;
       font-weight: bold;
       text-align: right;
-      line-height: 1.5;
-      padding: 15px;
+      line-height: 1.3;
+      padding: 10px;
       background-color: rgba(240, 234, 220, 0.85);
-      border-radius: 8px;
+      border-radius: 5px;
       z-index: 10;
     }
-    
+
     /* --- 固定表示要素 (左上ロゴ) --- */
     .fixed-top-left {
       position: fixed;
-      /* 変更点: 角への余白を小さく調整 */
       top: 15px;
       left: 15px;
       z-index: 10;
     }
     .fixed-top-left img {
-      height: 70px;
+      height: 50px;
       width: auto;
     }
   </style>
@@ -104,6 +130,10 @@
     <div class="slide"></div>
   </div>
 
+  <div class="center-message">
+    しばらくお待ちください...
+  </div>
+  
   <div class="fixed-bottom-right">
     画面をタップしてアンケートにご協力ください<br>
     Tap the screen to take the survey<br>
