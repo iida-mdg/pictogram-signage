@@ -35,24 +35,23 @@
       background-position: center center;
       background-repeat: no-repeat;
       opacity: 0;
-      animation-name: fadeLoop;
+      animation-name: backgroundFade; /* アニメーション名を変更 */
       animation-iteration-count: infinite;
       will-change: opacity;
     }
 
-    /* --- 背景画像アニメーション --- */
-    @keyframes fadeLoop {
-      0%    { opacity: 0; }
-      /* 1枚あたり6秒のうち、最初の1秒でフェードイン */
-      16.66% { opacity: 1; }
-      /* 次の画像に切り替わる前の1秒でフェードアウト */
-      83.33% { opacity: 1; } 
-      100%  { opacity: 0; }
+    /* 変更点: 背景のアニメーションをより速く切り替えるように調整 */
+    @keyframes backgroundFade {
+      0% { opacity: 0; }
+      1% { opacity: 1; } /* 0.42秒で素早くフェードイン */
+      15.66% { opacity: 1; }
+      16.66% { opacity: 0; } /* 0.42秒で素早くフェードアウト */
+      100% { opacity: 0; }
     }
 
     /* --- 背景画像の表示時間 --- */
     .slide {
-      /* 1枚あたり6秒 × 7枚 = 42秒 でループ */
+      /* 変更点: 1枚あたり6秒 × 7枚 = 42秒 でループ */
       animation-duration: 42s;
     }
     .slide:nth-child(1) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram1.jpg'); animation-delay: 0s; }
@@ -69,53 +68,35 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #555;
-      font-size: 1.5em;
+      color: #333; /* 文字色を少し濃くして視認性UP */
+      font-size: 1.5em; /* 文字サイズを変更 */
       font-weight: bold;
       text-align: center;
+      line-height: 1.5;
+      padding: 20px;
+      background-color: rgba(240, 234, 220, 0.9); /* 背景に合わせて半透明に */
+      border-radius: 10px;
       opacity: 0;
-      animation-name: fadeInOut;
+      animation-name: textFade; /* アニメーション名を変更 */
       animation-duration: 6s; /* 背景画像1枚あたりのサイクルに合わせる */
       animation-iteration-count: infinite;
       will-change: opacity;
     }
 
-    /* --- メッセージのアニメーション (ふんわり) --- */
-    @keyframes fadeInOut {
-      0%    { opacity: 0; }
-      16.66% { opacity: 1; } /* 1秒かけてフェードイン */
-      33.33% { opacity: 1; } /* 1秒表示 */
-      50%   { opacity: 0; } /* 1秒かけてフェードアウト */
-      100%  { opacity: 0; }
+    /* 変更点: 文字のアニメーションを調整 */
+    @keyframes textFade {
+      0% { opacity: 0; }
+      10% { opacity: 0; } /* 背景が切り替わるのを待つ */
+      20% { opacity: 1; } /* ふわっと表示 */
+      80% { opacity: 1; } /* 表示を維持 */
+      90% { opacity: 0; } /* ふわっと消える */
+      100% { opacity: 0; }
     }
 
-    /* --- 固定表示要素 (右下メッセージ) --- */
-    .fixed-bottom-right {
-      position: fixed;
-      bottom: 15px;
-      right: 15px;
-      color: #333;
-      font-size: 0.9em;
-      font-weight: bold;
-      text-align: right;
-      line-height: 1.3;
-      padding: 10px;
-      background-color: rgba(240, 234, 220, 0.85);
-      border-radius: 5px;
-      z-index: 10;
-    }
-
-    /* --- 固定表示要素 (左上ロゴ) --- */
-    .fixed-top-left {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      z-index: 10;
-    }
-    .fixed-top-left img {
-      height: 50px;
-      width: auto;
-    }
+    /* --- 固定表示要素は削除（中央メッセージに役割を統合） --- */
+    .fixed-bottom-right { display: none; }
+    .fixed-top-left { display: none; }
+    
   </style>
 </head>
 <body>
@@ -131,17 +112,9 @@
   </div>
 
   <div class="center-message">
-    しばらくお待ちください...
-  </div>
-  
-  <div class="fixed-bottom-right">
     画面をタップしてアンケートにご協力ください<br>
     Tap the screen to take the survey<br>
     请点击屏幕参与问卷调查
-  </div>
-
-  <div class="fixed-top-left">
-    <img src="https://iida-mdg.github.io/pictogram-signage/logo.png" alt="University Logo">
   </div>
 
 </body>
