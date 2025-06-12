@@ -31,9 +31,7 @@
       width: 100%;
       height: 100%;
 
-      /* ★★★★★ 今回の最重要設定 ★★★★★ */
-      /* 画像の全体が必ず表示されるように設定します。 */
-      /* 画像が切り取られることはありません。 */
+      /* 画像の全体が必ず表示されるように設定 */
       background-size: contain;
       background-position: center center;
       background-repeat: no-repeat;
@@ -49,52 +47,48 @@
     @keyframes fadeLoop {
       /* 1枚あたりの表示時間の割合: 100% / 7枚 ≒ 14.28% */
       0%    { opacity: 0; }
-      5%    { opacity: 1; }     /* 1.05秒かけてフェードイン (21s * 5%) */
-      9.28% { opacity: 1; }     /* 0.9秒表示し続ける */
-      14.28% { opacity: 0; }    /* 1.05秒かけてフェードアウト */
+      5%    { opacity: 1; }
+      9.28% { opacity: 1; }
+      14.28% { opacity: 0; }
       100%  { opacity: 0; }
     }
 
-    /* --- ★★★★★ 画像と速度のカスタマイズ ★★★★★ --- */
+    /* --- 画像と速度のカスタマイズ --- */
     
     .slide {
-      /* アニメーション全体の時間 = (1枚あたりの秒数) × (枚数) */
-      /* 今回の指定: 3秒 × 7枚 = 21秒 */
+      /* 1枚あたり3秒 × 7枚 = 21秒 でループ */
       animation-duration: 21s;
     }
 
     /* 7枚の画像をそれぞれ指定し、アニメーションが始まるタイミングをずらします */
-    /* 注: urlの中の 'YOUR_USERNAME' と 'YOUR_REPOSITORY_NAME' はご自身のものに変更してください */
-
     .slide:nth-child(1) {
-      background-image: url('https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/pictogram1.jpg');
+      background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram1.jpg');
       animation-delay: 0s;
     }
     .slide:nth-child(2) {
-      background-image: url('https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/pictogram2.jpg');
-      animation-delay: 3s; /* 1枚あたり3秒ずつずらす */
+      background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram2.jpg');
+      animation-delay: 3s;
     }
     .slide:nth-child(3) {
-      background-image: url('https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/pictogram3.jpg');
+      background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram3.jpg');
       animation-delay: 6s;
     }
     .slide:nth-child(4) {
-      background-image: url('https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/pictogram4.jpg');
+      background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram4.jpg');
       animation-delay: 9s;
     }
     .slide:nth-child(5) {
-      background-image: url('https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/pictogram5.jpg');
+      background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram5.jpg');
       animation-delay: 12s;
     }
     .slide:nth-child(6) {
-      background-image: url('https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/pictogram6.jpg');
+      background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram6.jpg');
       animation-delay: 15s;
     }
     .slide:nth-child(7) {
-      background-image: url('https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/pictogram7.jpg');
+      background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram7.jpg');
       animation-delay: 18s;
     }
-    /* --- カスタマイズはここまで --- */
 
   </style>
 </head>
