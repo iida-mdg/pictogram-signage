@@ -35,32 +35,41 @@
       background-position: center center;
       background-repeat: no-repeat;
       opacity: 0;
-      animation-name: backgroundFade; /* アニメーション名を変更 */
+      animation-name: backgroundFade;
       animation-iteration-count: infinite;
       will-change: opacity;
     }
 
-    /* 変更点: 背景のアニメーションをより速く切り替えるように調整 */
+    /* 背景のアニメーション */
     @keyframes backgroundFade {
       0% { opacity: 0; }
-      1% { opacity: 1; } /* 0.42秒で素早くフェードイン */
-      15.66% { opacity: 1; }
-      16.66% { opacity: 0; } /* 0.42秒で素早くフェードアウト */
+      /* 1枚あたり6秒のうちの割合で計算: 100% / 6枚 = 16.66% */
+      1.5% { opacity: 1; }  /* 約0.5秒でフェードイン */
+      15.16% { opacity: 1; }
+      16.66% { opacity: 0; }  /* 約0.5秒でフェードアウト */
       100% { opacity: 0; }
     }
 
     /* --- 背景画像の表示時間 --- */
     .slide {
-      /* 変更点: 1枚あたり6秒 × 7枚 = 42秒 でループ */
-      animation-duration: 42s;
+      /* 変更点: 1枚あたり6秒 × 6枚 = 36秒 でループ */
+      animation-duration: 36s;
     }
+    
+    /* 7枚の画像をそれぞれ指定し、アニメーションが始まるタイミングをずらします */
     .slide:nth-child(1) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram1.jpg'); animation-delay: 0s; }
     .slide:nth-child(2) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram2.jpg'); animation-delay: 6s; }
-    .slide:nth-child(3) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram3.jpg'); animation-delay: 12s; }
-    .slide:nth-child(4) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram4.jpg'); animation-delay: 18s; }
-    .slide:nth-child(5) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram5.jpg'); animation-delay: 24s; }
-    .slide:nth-child(6) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram6.jpg'); animation-delay: 30s; }
-    .slide:nth-child(7) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram7.jpg'); animation-delay: 36s; }
+    
+    /* 変更点: 3枚目のスライドを非表示にする */
+    .slide:nth-child(3) { 
+      display: none; 
+    }
+
+    /* 変更点: 4枚目以降の表示タイミングを前倒しする */
+    .slide:nth-child(4) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram4.jpg'); animation-delay: 12s; }
+    .slide:nth-child(5) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram5.jpg'); animation-delay: 18s; }
+    .slide:nth-child(6) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram6.jpg'); animation-delay: 24s; }
+    .slide:nth-child(7) { background-image: url('https://iida-mdg.github.io/pictogram-signage/pictogram7.jpg'); animation-delay: 30s; }
 
     /* --- 中央メッセージ --- */
     .center-message {
@@ -68,32 +77,32 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #333; /* 文字色を少し濃くして視認性UP */
-      font-size: 1.5em; /* 文字サイズを変更 */
+      color: #333;
+      font-size: 1.5em;
       font-weight: bold;
       text-align: center;
       line-height: 1.5;
       padding: 20px;
-      background-color: rgba(240, 234, 220, 0.9); /* 背景に合わせて半透明に */
+      background-color: rgba(240, 234, 220, 0.9);
       border-radius: 10px;
       opacity: 0;
-      animation-name: textFade; /* アニメーション名を変更 */
-      animation-duration: 6s; /* 背景画像1枚あたりのサイクルに合わせる */
+      animation-name: textFade;
+      animation-duration: 6s;
       animation-iteration-count: infinite;
       will-change: opacity;
     }
 
-    /* 変更点: 文字のアニメーションを調整 */
+    /* 文字のアニメーション */
     @keyframes textFade {
       0% { opacity: 0; }
-      10% { opacity: 0; } /* 背景が切り替わるのを待つ */
-      20% { opacity: 1; } /* ふわっと表示 */
-      80% { opacity: 1; } /* 表示を維持 */
-      90% { opacity: 0; } /* ふわっと消える */
+      10% { opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      90% { opacity: 0; }
       100% { opacity: 0; }
     }
 
-    /* --- 固定表示要素は削除（中央メッセージに役割を統合） --- */
+    /* --- 固定表示要素は削除 --- */
     .fixed-bottom-right { display: none; }
     .fixed-top-left { display: none; }
     
